@@ -7,6 +7,7 @@ import {
   type InfiniteQueryObserverResult,
 } from "@tanstack/react-query";
 import { createContext, useContext, type ReactNode } from "react";
+import { useAuth } from "./AuthContext";
 
 interface TodoPage {
     todos: TodoType[];
@@ -28,6 +29,7 @@ type TodoContextType = {
 const TodoContext = createContext<TodoContextType | undefined>(undefined);
 
 export const TodoProvider = ({ children }: { children: ReactNode }) => {
+  const {user} = useAuth()
     const {
     data: tasks,
     fetchNextPage,
@@ -45,6 +47,7 @@ export const TodoProvider = ({ children }: { children: ReactNode }) => {
     getNextPageParam: (lastPage, pages) => {
       return lastPage.hasMore ? pages.length + 1 : undefined;
     },
+    enabled: !!user,
   });
 
 interface TodoPage {
