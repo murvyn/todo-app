@@ -8,8 +8,8 @@ import {
   useEffect,
   useRef,
   useMemo,
-  FC,
-  ReactNode,
+  type FC,
+  type ReactNode,
 } from "react";
 
 import * as THREE from "three";
